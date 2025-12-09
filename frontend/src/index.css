@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 180 20% 99%;
+    --foreground: 200 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 200 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 25% 15%;
+
+    --primary: 187 72% 38%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 180 15% 96%;
+    --secondary-foreground: 200 25% 15%;
+
+    --muted: 180 10% 94%;
+    --muted-foreground: 200 10% 45%;
+
+    --accent: 16 85% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 180 15% 90%;
+    --input: 180 15% 90%;
+    --ring: 187 72% 38%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --hero-gradient: linear-gradient(135deg, hsl(187, 72%, 38%) 0%, hsl(175, 60%, 45%) 100%);
+    --card-shadow: 0 4px 20px -4px hsl(200 25% 15% / 0.08);
+    --card-shadow-hover: 0 12px 40px -8px hsl(200 25% 15% / 0.15);
+    --glow-primary: 0 0 40px hsl(187 72% 38% / 0.25);
+    
+    --success: 152 70% 40%;
+    --success-foreground: 0 0% 100%;
+    
+    --whatsapp: 142 70% 45%;
+    --whatsapp-foreground: 0 0% 100%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 200 25% 8%;
+    --foreground: 180 20% 98%;
+
+    --card: 200 20% 12%;
+    --card-foreground: 180 20% 98%;
+
+    --popover: 200 20% 12%;
+    --popover-foreground: 180 20% 98%;
+
+    --primary: 187 72% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 200 15% 18%;
+    --secondary-foreground: 180 20% 98%;
+
+    --muted: 200 15% 20%;
+    --muted-foreground: 180 10% 60%;
+
+    --accent: 16 85% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 200 15% 20%;
+    --input: 200 15% 20%;
+    --ring: 187 72% 45%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .gradient-primary {
+    background: var(--hero-gradient);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background: var(--hero-gradient);
+  }
+
+  .card-elevated {
+    box-shadow: var(--card-shadow);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .card-elevated:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-2px);
+  }
+
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
