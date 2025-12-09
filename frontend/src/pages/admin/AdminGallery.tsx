@@ -37,7 +37,7 @@ const AdminGallery = () => {
     const { data: items, isLoading } = useQuery({
         queryKey: ["gallery"],
         queryFn: async () => {
-            const response = await axios.get("http://localhost:5000/api/gallery");
+            const response = await axios.get(`${process.env.VITE_BACKEND_URL}/api/gallery`);
             return response.data;
         },
     });
@@ -46,7 +46,7 @@ const AdminGallery = () => {
     const uploadMutation = useMutation({
         mutationFn: async (formData: FormData) => {
             const token = localStorage.getItem("token");
-            const response = await axios.post("http://localhost:5000/api/gallery", formData, {
+            const response = await axios.post(`${process.env.VITE_BACKEND_URL}/api/gallery`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${token}`,
@@ -72,7 +72,7 @@ const AdminGallery = () => {
     const deleteMutation = useMutation({
         mutationFn: async (id: string) => {
             const token = localStorage.getItem("token");
-            await axios.delete(`http://localhost:5000/api/gallery/${id}`, {
+            await axios.delete(`${process.env.VITE_BACKEND_URL}/api/gallery/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -244,13 +244,13 @@ const AdminGallery = () => {
                         <div className="aspect-video relative bg-muted">
                             {item.type === "image" ? (
                                 <img
-                                    src={item.url.startsWith("http") ? item.url : `http://localhost:5000${item.url}`}
+                                    src={item.url.startsWith("http") ? item.url : `${process.env.VITE_BACKEND_URL}${item.url}`}
                                     alt={item.title}
                                     className="w-full h-full object-cover"
                                 />
                             ) : (
                                 <video
-                                    src={item.url.startsWith("http") ? item.url : `http://localhost:5000${item.url}`}
+                                    src={item.url.startsWith("http") ? item.url : `${process.env.VITE_BACKEND_URL}${item.url}`}
                                     className="w-full h-full object-cover"
                                     controls
                                 />
