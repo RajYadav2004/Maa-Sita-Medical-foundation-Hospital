@@ -124,7 +124,7 @@ const AdminTeam = () => {
                                 <TableCell>
                                     {member.image ? (
                                         <img
-                                            src={member.image.startsWith("http") ? member.image : `${process.env.VITE_BACKEND_URL}${member.image}`}
+                                            src={member.image.startsWith("http") ? member.image : `${import.meta.env.VITE_BACKEND_URL}${member.image}`}
                                             alt={member.name}
                                             className="h-10 w-10 rounded-full object-cover"
                                         />

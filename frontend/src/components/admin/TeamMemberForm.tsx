@@ -47,7 +47,7 @@ const TeamMemberForm = ({ initialData, onSubmit, isLoading, onCancel }: TeamMemb
                 imageUrl: initialData.image?.startsWith("http") ? initialData.image : "",
             });
             if (initialData.image && !initialData.image.startsWith("http")) {
-                setPreviewUrl(`${process.env.VITE_BACKEND_URL}${initialData.image}`);
+                setPreviewUrl(`${import.meta.env.VITE_BACKEND_URL}${initialData.image}`);
             } else if (initialData.image) {
                 setPreviewUrl(initialData.image);
             }

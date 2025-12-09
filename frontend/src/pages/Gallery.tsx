@@ -8,7 +8,7 @@ const Gallery = () => {
     const { data: galleryItems, isLoading } = useQuery({
         queryKey: ["gallery"],
         queryFn: async () => {
-            const response = await axios.get(`${process.env.VITE_BACKEND_URL}/api/gallery`);
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/gallery`);
             return response.data;
         },
     });
@@ -47,14 +47,14 @@ const Gallery = () => {
                             >
                                 {item.type === "image" ? (
                                     <img
-                                        src={item.url.startsWith("http") ? item.url : `${process.env.VITE_BACKEND_URL}${item.url}`}
+                                        src={item.url.startsWith("http") ? item.url : `${import.meta.env.VITE_BACKEND_URL}${item.url}`}
                                         alt={item.title}
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                     />
                                 ) : (
                                     <div className="relative w-full h-full">
                                         <video
-                                            src={item.url.startsWith("http") ? item.url : `${process.env.VITE_BACKEND_URL}${item.url}`}
+                                            src={item.url.startsWith("http") ? item.url : `${import.meta.env.VITE_BACKEND_URL}${item.url}`}
                                             className="w-full h-full object-cover"
                                             controls
                                         />

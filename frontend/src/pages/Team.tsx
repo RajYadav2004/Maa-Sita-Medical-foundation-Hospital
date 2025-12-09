@@ -49,7 +49,7 @@ const Team = () => {
                             <div className="aspect-square overflow-hidden bg-muted">
                                 {member.image ? (
                                     <img
-                                        src={member.image.startsWith("http") ? member.image : `${process.env.VITE_BACKEND_URL}${member.image}`}
+                                        src={member.image.startsWith("http") ? member.image : `${import.meta.env.VITE_BACKEND_URL}${member.image}`}
                                         alt={member.name}
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     />

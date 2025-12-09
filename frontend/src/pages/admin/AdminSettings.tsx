@@ -24,7 +24,7 @@ const AdminSettings = () => {
     const { data: settings, isLoading } = useQuery({
         queryKey: ["settings"],
         queryFn: async () => {
-            const response = await axios.get("${process.env.VITE_BACKEND_URL}/api/settings");
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/settings`);
             return response.data;
         },
     });
@@ -47,7 +47,7 @@ const AdminSettings = () => {
     const mutation = useMutation({
         mutationFn: async (data: typeof formData) => {
             const token = localStorage.getItem("token");
-            const response = await axios.put(`${process.env.VITE_BACKEND_URL}/api/settings`, data, {
+            const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/settings`, data, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             return response.data;
