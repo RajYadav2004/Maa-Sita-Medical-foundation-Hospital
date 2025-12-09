@@ -52,18 +52,16 @@ app.use('/api/team', teamRoutes);
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 // Serve frontend in production
+// Serve frontend in production (only if we have a frontend build available - not typical for Vercel backend-only deploys)
+// For Vercel API deployment, we usually just want the API routes to work.
+app.get('/', (req, res) => {
+    res.send('API is running...');
+});
+/*
 if (process.env.NODE_ENV === 'production') {
-    const frontendPath = path.join(__dirname, '../frontend/dist');
-    app.use(express.static(frontendPath));
-
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(frontendPath, 'index.html'));
-    });
-} else {
-    app.get('/', (req, res) => {
-        res.send('API is running...');
-    });
+    // ... code commented out as it breaks isolated backend deployment ...
 }
+*/
 
 // Only listen if the file is run directly (not imported)
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
