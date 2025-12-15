@@ -103,17 +103,22 @@ const AdminGallery = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        console.log('Submitting form...');
+
         if (!title) {
+            console.error('Validation error: Title is missing');
             toast.error("Please provide a title");
             return;
         }
 
         if (inputType === "file" && !file) {
+            console.error('Validation error: File is missing');
             toast.error("Please select a file");
             return;
         }
 
         if (inputType === "url" && !url) {
+            console.error('Validation error: URL is missing');
             toast.error("Please provide a URL");
             return;
         }
@@ -121,14 +126,19 @@ const AdminGallery = () => {
         const formData = new FormData();
         formData.append("title", title);
         formData.append("type", type);
+        console.log('FormData: title =', title);
+        console.log('FormData: type =', type);
 
         if (inputType === "file" && file) {
             formData.append("file", file);
+            console.log('FormData: file =', file.name, file.size, file.type);
         } else if (inputType === "url" && url) {
             formData.append("url", url);
+            console.log('FormData: url =', url);
         }
 
         setUploading(true);
+        console.log('Triggering upload mutation...');
         uploadMutation.mutate(formData);
     };
 

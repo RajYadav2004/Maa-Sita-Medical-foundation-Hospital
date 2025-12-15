@@ -15,11 +15,15 @@ const generateToken = (id) => {
 // @route   POST /api/auth/login
 // @access  Public
 router.post('/login', async (req, res) => {
+    console.log('Login request received');
+    console.log('Request body:', req.body);
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
+    console.log('User found:', user ? 'Yes' : 'No');
 
     if (user && (await user.matchPassword(password))) {
+        console.log('Password match: Yes');
         res.json({
             _id: user._id,
             email: user.email,
@@ -27,6 +31,7 @@ router.post('/login', async (req, res) => {
             token: generateToken(user._id),
         });
     } else {
+        console.log('Password match: No');
         res.status(401).json({ message: 'Invalid email or password' });
     }
 });

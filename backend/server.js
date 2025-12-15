@@ -22,8 +22,13 @@ const __dirname = path.dirname(__filename);
 
 // Ensure uploads directory exists
 const uploadDir = path.join(__dirname, 'uploads');
+console.log('Upload directory path:', uploadDir);
 if (!fs.existsSync(uploadDir)) {
+    console.log('Upload directory does not exist, creating it...');
     fs.mkdirSync(uploadDir, { recursive: true });
+    console.log('Upload directory created.');
+} else {
+    console.log('Upload directory already exists.');
 }
 
 const app = express();

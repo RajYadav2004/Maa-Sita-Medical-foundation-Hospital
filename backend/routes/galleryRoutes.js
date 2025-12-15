@@ -48,11 +48,20 @@ const upload = multer({
 
 // Custom upload middleware to handle errors
 const uploadMiddleware = (req, res, next) => {
+    console.log('Starting file upload middleware...');
     upload.single('file')(req, res, (err) => {
         if (err instanceof multer.MulterError) {
+            console.error('Multer error:', err);
             return res.status(400).json({ message: `Upload error: ${err.message}` });
         } else if (err) {
+            console.error('Unknown upload error:', err);
             return res.status(400).json({ message: err });
+        }
+        console.log('File upload middleware completed successfully.');
+        if (req.file) {
+            console.log('File received:', req.file);
+        } else {
+            console.log('No file received in middleware.');
         }
         next();
     });
@@ -74,6 +83,8 @@ router.get('/', async (req, res) => {
 // @route   POST /api/gallery
 // @access  Private/Admin
 router.post('/', protect, admin, uploadMiddleware, async (req, res) => {
+    console.log('POST /api/gallery handler started');
+    console.log('Request Body:', req.body);
     try {
         const { title, type, url: bodyUrl } = req.body;
         const file = req.file;
@@ -82,9 +93,12 @@ router.post('/', protect, admin, uploadMiddleware, async (req, res) => {
 
         if (file) {
             finalUrl = `/uploads/${file.filename}`;
+            console.log('Using uploaded file path:', finalUrl);
         } else if (bodyUrl) {
             finalUrl = bodyUrl;
+            console.log('Using external URL:', finalUrl);
         } else {
+            console.error('No file or URL provided');
             return res.status(400).json({ message: 'Please upload a file or provide a URL' });
         }
 
@@ -95,8 +109,10 @@ router.post('/', protect, admin, uploadMiddleware, async (req, res) => {
         });
 
         const createdItem = await galleryItem.save();
+        console.log('Gallery item saved:', createdItem);
         res.status(201).json(createdItem);
     } catch (error) {
+        console.error('Error saving gallery item:', error);
         res.status(500).json({ message: error.message });
     }
 });
