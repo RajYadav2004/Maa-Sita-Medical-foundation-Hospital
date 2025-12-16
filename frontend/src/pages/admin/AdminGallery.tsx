@@ -48,7 +48,6 @@ const AdminGallery = () => {
             const token = localStorage.getItem("token");
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/gallery`, formData, {
                 headers: {
-                    "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${token}`,
                 },
             });
